@@ -544,9 +544,9 @@ go test ./cmd/ -v     # 端到端测试（带模拟服务端）
 
 ```bash
 go build -ldflags "\
-  -X github.com/QuantumNous/new-api-cli/internal/build.Version=v1.0.0 \
-  -X github.com/QuantumNous/new-api-cli/internal/build.Commit=$(git rev-parse --short HEAD) \
-  -X github.com/QuantumNous/new-api-cli/internal/build.Date=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+  -X github.com/huangxin8899/new-api-cli/internal/build.Version=v1.0.0 \
+  -X github.com/huangxin8899/new-api-cli/internal/build.Commit=$(git rev-parse --short HEAD) \
+  -X github.com/huangxin8899/new-api-cli/internal/build.Date=$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
   -o new-api-cli .
 ```
 

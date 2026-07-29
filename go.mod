@@ -1,4 +1,4 @@
-module github.com/QuantumNous/new-api-cli
+module github.com/huangxin8899/new-api-cli
 
 go 1.23.0
 

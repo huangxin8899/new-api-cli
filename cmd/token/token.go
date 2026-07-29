@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/QuantumNous/new-api-cli/errs"
-	"github.com/QuantumNous/new-api-cli/internal/client"
-	"github.com/QuantumNous/new-api-cli/internal/cmdutil"
+	"github.com/huangxin8899/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/internal/client"
+	"github.com/huangxin8899/new-api-cli/internal/cmdutil"
 
 	"github.com/spf13/cobra"
 )

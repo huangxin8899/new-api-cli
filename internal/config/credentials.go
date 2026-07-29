@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/QuantumNous/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/errs"
 )
 
 // CredentialKind 区分令牌的来源，决定过期与刷新策略。

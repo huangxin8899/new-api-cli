@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/QuantumNous/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/errs"
 )
 
 // newTestEmitter 构造一个写入内存缓冲、关闭颜色的 Emitter。

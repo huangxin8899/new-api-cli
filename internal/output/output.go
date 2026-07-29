@@ -16,7 +16,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/QuantumNous/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/errs"
 )
 
 // Format 是输出格式枚举。

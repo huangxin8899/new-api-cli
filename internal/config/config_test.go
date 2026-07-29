@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/QuantumNous/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/errs"
 )
 
 // isolate 把配置根目录指向临时目录，并清空所有会影响解析的环境变量，

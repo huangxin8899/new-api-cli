@@ -3,7 +3,7 @@ package output
 import (
 	"encoding/json"
 
-	"github.com/QuantumNous/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/errs"
 	"github.com/itchyny/gojq"
 )
 

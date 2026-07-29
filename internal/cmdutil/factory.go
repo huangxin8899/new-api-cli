@@ -9,10 +9,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/QuantumNous/new-api-cli/errs"
-	"github.com/QuantumNous/new-api-cli/internal/client"
-	"github.com/QuantumNous/new-api-cli/internal/config"
-	"github.com/QuantumNous/new-api-cli/internal/output"
+	"github.com/huangxin8899/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/internal/client"
+	"github.com/huangxin8899/new-api-cli/internal/config"
+	"github.com/huangxin8899/new-api-cli/internal/output"
 	"github.com/spf13/cobra"
 )
 

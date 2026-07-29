@@ -7,7 +7,7 @@ package main
 import (
 	"os"
 
-	"github.com/QuantumNous/new-api-cli/cmd"
+	"github.com/huangxin8899/new-api-cli/cmd"
 )
 
 func main() {

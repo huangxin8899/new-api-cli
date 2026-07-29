@@ -24,9 +24,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/new-api-cli/errs"
-	"github.com/QuantumNous/new-api-cli/internal/build"
-	"github.com/QuantumNous/new-api-cli/internal/config"
+	"github.com/huangxin8899/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/internal/build"
+	"github.com/huangxin8899/new-api-cli/internal/config"
 )
 
 // Client 是一个绑定了 profile 设置的 New API 管理接口客户端。

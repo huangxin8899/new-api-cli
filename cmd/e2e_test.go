@@ -11,7 +11,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/QuantumNous/new-api-cli/internal/cmdutil"
+	"github.com/huangxin8899/new-api-cli/internal/cmdutil"
 )
 
 // mockSite 是一个最小的 New API 管理接口替身。它复刻了真实服务端两个

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/QuantumNous/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/errs"
 )
 
 // ParseEnum 校验一个取值受限的参数，返回归一化后的小写值。

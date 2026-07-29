@@ -2,7 +2,7 @@
 //
 // 通过 -ldflags 覆盖：
 //
-//	go build -ldflags "-X github.com/QuantumNous/new-api-cli/internal/build.Version=v1.0.0"
+//	go build -ldflags "-X github.com/huangxin8899/new-api-cli/internal/build.Version=v1.0.0"
 package build
 
 import (

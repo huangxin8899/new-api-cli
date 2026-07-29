@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/QuantumNous/new-api-cli/errs"
-	"github.com/QuantumNous/new-api-cli/internal/config"
+	"github.com/huangxin8899/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/internal/config"
 )
 
 // newTestClient 指向一个测试服务器，省去配置文件依赖。

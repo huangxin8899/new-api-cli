@@ -16,7 +16,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/QuantumNous/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/errs"
 	"gopkg.in/yaml.v3"
 )
 

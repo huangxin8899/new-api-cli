@@ -10,7 +10,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/QuantumNous/new-api-cli/errs"
+	"github.com/huangxin8899/new-api-cli/errs"
 )
 
 // normalize 把任意 Go 值转成 JSON 原生形态（map / []any / 标量）。
