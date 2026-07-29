@@ -1,0 +1,25 @@
+# 编译产物
+new-api-cli
+new-api-cli.exe
+/dist/
+/bin/
+
+# Go 测试与覆盖率
+*.test
+*.out
+coverage.txt
+
+# 本地配置与凭据
+config.yaml
+config.yml
+credentials.yaml
+credentials.yml
+.env
+.env.*
+
+# 编辑器与系统文件
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
