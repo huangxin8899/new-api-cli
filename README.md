@@ -60,6 +60,12 @@ export NEW_API_TOKEN="<系统访问令牌>"
 new-api-cli channel list --jq '.[].name'
 ```
 
+Agent 的第一步建议先读内置技能文档 —— 认证、JSON 契约、确认门禁都在里面：
+
+```bash
+new-api-cli skills read new-api-shared
+```
+
 ## 认证
 
 两种凭据，按场景选：
@@ -181,8 +187,38 @@ new-api-cli api PUT /api/option/ --data '{"key":"AutoDisable","value":"true"}'
 | `option` | 站点系统设置 | 超级管理员 |
 | `status` | 站点状态、公告、定价、性能指标 | 混合 |
 | `api` | 通用 HTTP 调用 | 取决于目标接口 |
+| `skills` | 内置的 Agent 技能文档 | 本地 |
 
 运行 `new-api-cli <域> --help` 查看该域的全部子命令。
+
+## 内置 Agent 技能文档
+
+每个命令域配了一份写给 AI Agent 的技能文档，**编译期嵌入二进制**，因此内容与 CLI 版本天然同步 —— Agent 不需要联网下载，也不会读到过期的用法。
+
+```bash
+new-api-cli skills list                       # 有哪些技能
+new-api-cli skills read new-api-shared        # 通用规则：认证、JSON 契约、确认门禁
+new-api-cli skills list new-api-channel       # 某个技能下有哪些文件
+new-api-cli skills read new-api-channel/references/new-api-channel-health.md
+```
+
+`read` 默认把原始 markdown 写到 stdout（提示走 stderr），加 `--json` 则包成标准信封。
+
+| 技能 | 覆盖 |
+| --- | --- |
+| `new-api-shared` | 通用规则 —— **任何任务先读这个** |
+| `new-api-troubleshoot` | 从症状出发的端到端排障工作流 |
+| `new-api-channel` | 上游渠道 |
+| `new-api-token` | `sk-` 调用令牌 |
+| `new-api-user` | 站点用户 |
+| `new-api-log` | 调用日志与用量统计 |
+| `new-api-model` | 模型元数据 |
+| `new-api-redemption` | 兑换码 |
+| `new-api-option` | 站点系统设置 |
+| `new-api-status` | 站点状态与公开信息 |
+| `new-api-api` | 通用 HTTP 调用兜底 |
+
+文档源文件在仓库的 `skills/` 目录下，用 `go build .` 构建才会嵌入（`go build ./main.go` 的单文件预览构建不含它们）。
 
 ## 常用操作
 
@@ -528,6 +564,8 @@ go test ./cmd/ -v     # 端到端测试（带模拟服务端）
 ```
 .
 ├── main.go                 # 入口
+├── content_embed.go        # 把 skills/ 嵌入二进制（go:embed）
+├── skills/                 # Agent 技能文档，一个子目录一个技能
 ├── cmd/                    # 命令树，一个子目录一个域
 │   ├── root.go             # 全局 flag、分组、错误分发
 │   └── e2e_test.go         # 端到端测试（模拟 New API 服务端）
@@ -536,6 +574,7 @@ go test ./cmd/ -v     # 端到端测试（带模拟服务端）
 │   ├── config/             # 配置与凭据存储
 │   ├── output/             # 渲染：JSON/table/csv/ndjson/pretty、jq、净化
 │   ├── cmdutil/            # Factory、风险等级、参数解析、列表脚手架
+│   ├── skillcontent/       # 读取嵌入的技能文档
 │   └── build/              # 编译期版本信息
 └── errs/                   # 类型化错误与退出码契约
 ```

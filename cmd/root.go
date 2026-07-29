@@ -5,6 +5,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"io/fs"
 	"os"
 	"os/signal"
 	"strings"
@@ -19,6 +20,7 @@ import (
 	modelcmd "github.com/huangxin8899/new-api-cli/cmd/model"
 	"github.com/huangxin8899/new-api-cli/cmd/option"
 	"github.com/huangxin8899/new-api-cli/cmd/redemption"
+	"github.com/huangxin8899/new-api-cli/cmd/skill"
 	statuscmd "github.com/huangxin8899/new-api-cli/cmd/status"
 	"github.com/huangxin8899/new-api-cli/cmd/token"
 	usercmd "github.com/huangxin8899/new-api-cli/cmd/user"
@@ -32,6 +34,7 @@ import (
 const rootLong = `new-api-cli — New API 网关命令行工具。
 
 面向 AI Agent 的速查：
+    读技能文档: new-api-cli skills list             # 内置技能文档，先读 new-api-shared
     浏览命令:   new-api-cli <域> --help          # 每个域下有 + 快捷命令和资源命令
     查看风险:   命令 --help 顶部标注 read | write | high-risk-write
                 high-risk-write 必须先获得用户确认，再加 --yes 执行
@@ -53,7 +56,7 @@ const rootExample = `  # 首次配置（交互式，只需一次）
   # 常用查询
   new-api-cli channel +health
   new-api-cli token list --format table
-  new-api-cli log +today --format table`
+  new-api-cli log list --type error --since 1h --format table`
 
 // 命令分组，让 --help 有结构而不是一长串。
 const (
@@ -69,11 +72,20 @@ type usageError struct{ err error }
 func (u *usageError) Error() string { return u.err.Error() }
 func (u *usageError) Unwrap() error { return u.err }
 
+// embeddedSkillContent 保存编译期嵌入的 skill 文档，由 main 包在 init 时注入。
+// 单文件预览构建（go build ./main.go）不注入，此时 skills 命令会明确报错，
+// 而不是静默返回空列表。
+var embeddedSkillContent fs.FS
+
+// SetEmbeddedSkillContent 注入 skill 文档的文件系统，根目录为 skill 列表。
+func SetEmbeddedSkillContent(fsys fs.FS) { embeddedSkillContent = fsys }
+
 // Execute 构建命令树、执行并返回进程退出码。
 func Execute() int {
 	streams := cmdutil.SystemIOStreams()
 	globals := &cmdutil.GlobalFlags{}
 	f := cmdutil.NewFactory(streams, globals)
+	f.SkillContent = embeddedSkillContent
 	root := NewRootCmd(f)
 
 	// Ctrl+C 取消进行中的请求，而不是留下半截 TCP 连接。
@@ -143,6 +155,7 @@ func NewRootCmd(f *cmdutil.Factory) *cobra.Command {
 		option.NewCmd(f),
 		statuscmd.NewCmd(f),
 		api.NewCmd(f),
+		skill.NewCmd(f),
 		newCompletionCmd(),
 		newVersionCmd(f),
 	)

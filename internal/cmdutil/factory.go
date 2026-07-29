@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/fs"
 	"os"
 	"strings"
 
@@ -56,6 +57,10 @@ type Factory struct {
 	Client func() (*client.Client, error)
 	// Emitter 按 --format/--jq 构造输出器。
 	Emitter func() (*output.Emitter, error)
+
+	// SkillContent 是编译期嵌入的 skill 文档，根目录为 skill 列表。
+	// 由 root 包在 init 时注入；未注入时 skills 命令报"未嵌入"。
+	SkillContent fs.FS
 }
 
 // NewFactory 装配一个使用真实文件系统与网络的 Factory。
